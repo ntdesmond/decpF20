@@ -93,7 +93,6 @@ namespace decpF20
         {
             // GTE = | y_i_exact - y_i | (not depending on previous values); i == StepsCalculated
             decimal value = Math.Abs(Solution.getValue(x_prev + Step) - Method.getApproximation(StepsCalculated + 1));
-            Console.WriteLine($"{x_prev} {y_prev} {value}");
             if (value > max_error)
                 MaxError = value;
             return value;
