@@ -46,7 +46,7 @@ namespace decpF20
                 LegendPosition = LegendPosition.TopRight
             };
             maxGlobalErrorsPlotView.Model.Axes.Add(new LinearAxis() {
-                Title = "Step count", Position = AxisPosition.Bottom, AbsoluteMinimum = 0
+                Title = "Step count", Position = AxisPosition.Bottom, AbsoluteMinimum = 1
             });
             maxGlobalErrorsPlotView.Model.Axes.Add(new LinearAxis() {
                 Title = "Maximal GTE", Position = AxisPosition.Left, AbsoluteMinimum = 0
@@ -71,13 +71,14 @@ namespace decpF20
             PlotSolutions(exact_solution, methods, x0, X, step);
             GlobalTruncationErrors[] globalErrors = new GlobalTruncationErrors[methods.Length];
             for (int i = 0; i < methods.Length; i++)
-                globalErrors[i] = new GlobalTruncationErrors(methods[i], exact_solution, N);
+                globalErrors[i] = new GlobalTruncationErrors(methods[i], exact_solution);
             PlotGlobalErrors(globalErrors, x0, X, step);
 
             GlobalErrorsFromSteps[] maxGlobalErrors = new GlobalErrorsFromSteps[methods.Length];
             for (int i = 0; i < methods.Length; i++)
             {
-                GlobalTruncationErrors initial_gte = new GlobalTruncationErrors(methods[i], exact_solution, n0);
+                methods[i].setNewBounds(1, methods[i].LowerBound, methods[i].HigherBound);
+                GlobalTruncationErrors initial_gte = new GlobalTruncationErrors(methods[i], exact_solution);
                 maxGlobalErrors[i] = new GlobalErrorsFromSteps(initial_gte, n0, N);
             }
             PlotMaxGlobalErrors(maxGlobalErrors, n0, N);

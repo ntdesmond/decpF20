@@ -1,4 +1,6 @@
-﻿using OxyPlot;
+﻿using System;
+using System.Drawing.Printing;
+using OxyPlot;
 
 namespace decpF20
 {

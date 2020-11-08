@@ -1,24 +1,35 @@
 ﻿using System;
+using System.CodeDom;
 
 namespace decpF20
 {
     abstract class Series
     {
 
-        protected decimal[] CalculatedValues { get; set; }
-        public decimal LowerBound { get; }
-        public decimal HigherBound { get; }
+        protected decimal[] CalculatedValues { get; private set; }
+        public decimal LowerBound { get; private set; }
+        public decimal HigherBound { get; private set; }
         public decimal Step { get; protected set; }
-        protected int StepsCalculated { get; set; } = 0;
+        public int StepCount { get; protected set; }
+        protected int StepsCalculated { get; set; }
+        private decimal InitialValue { get; }
 
         public Series(int step_count, decimal initial_value, decimal lower_bound, decimal higher_bound)
         {
+            InitialValue = initial_value;
+            setNewBounds(step_count, lower_bound, higher_bound);
+        }
+
+        public void setNewBounds(int step_count, decimal lower_bound, decimal higher_bound)
+        {
+            StepsCalculated = 0;
             LowerBound = lower_bound;
             HigherBound = higher_bound;
+            StepCount = step_count;
             Step = (higher_bound - lower_bound) / step_count;
             // Values are indexed from 0, where 0th is an initial value; see getValue()
             CalculatedValues = new decimal[step_count + 1];
-            CalculatedValues[0] = initial_value;
+            CalculatedValues[0] = InitialValue;
         }
 
         // Get the value of the series by the value of x (x must be in the bound of the series)
@@ -42,10 +53,10 @@ namespace decpF20
         // Calculate the value in the series (and the ones before it, if they were not calculated yet)
         protected decimal calculate(int step_num)
         {
-            for (int i = StepsCalculated; i < step_num; i++)
+            for (int i = StepsCalculated + 1; i <= step_num; i++)
             {
-                decimal x_prev = LowerBound + i * Step, y_prev = CalculatedValues[i];
-                CalculatedValues[i + 1] = getNext(x_prev, y_prev);
+                decimal x_prev = LowerBound + (i-1) * Step, y_prev = CalculatedValues[i-1];
+                CalculatedValues[i] = getNext(x_prev, y_prev);
                 StepsCalculated++;
             }
             return CalculatedValues[step_num];
@@ -65,14 +76,14 @@ namespace decpF20
             get 
             {
                 // Calculate the values till the last one and pick max_error after calculations
-                calculate(CalculatedValues.Length - 1);
+                calculate(StepCount);
                 return max_error;
             }
             private set => max_error = value;
         }
 
-        public GlobalTruncationErrors(NumericalMethod method, Function solution, int step_count) :
-            base(step_count, 0, method.LowerBound, method.HigherBound)
+        public GlobalTruncationErrors(NumericalMethod method, Function solution) :
+            base(method.StepCount, 0, method.LowerBound, method.HigherBound)
         {
             Solution = solution;
             Method = method;
@@ -81,7 +92,8 @@ namespace decpF20
         protected override decimal getNext(decimal x_prev, decimal y_prev)
         {
             // GTE = | y_i_exact - y_i | (not depending on previous values); i == StepsCalculated
-            decimal value = Math.Abs(Solution.getValue(x_prev + Step) - Method.getApproximation(StepsCalculated));
+            decimal value = Math.Abs(Solution.getValue(x_prev + Step) - Method.getApproximation(StepsCalculated + 1));
+            Console.WriteLine($"{x_prev} {y_prev} {value}");
             if (value > max_error)
                 MaxError = value;
             return value;
@@ -102,7 +114,7 @@ namespace decpF20
     {
         // Solution and Method are used for creating GTE objects
         public Function Solution { get; }
-        public NumericalMethod Method { get; }
+        public NumericalMethod Method { get; private set; }
         public GlobalErrorsFromSteps(GlobalTruncationErrors gte_0, int start_step, int end_step) :
             base(end_step - start_step + 1, gte_0.MaxError, start_step, end_step)
         {
@@ -111,10 +123,11 @@ namespace decpF20
             Method = gte_0.Method;
         }
 
-        protected override decimal getNext(decimal n_i, decimal gte_prev)
+        protected override decimal getNext(decimal n_prev, decimal gte_prev)
         {
             // Create GTE on the same method and error but with different step (grid) sizes
-            return new GlobalTruncationErrors(Method, Solution, (int)n_i).MaxError;
+            Method.setNewBounds((int)n_prev + 1, Method.LowerBound, Method.HigherBound);
+            return new GlobalTruncationErrors(Method, Solution).MaxError;
         }
 
         public decimal get(int step_num)
