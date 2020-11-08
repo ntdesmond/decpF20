@@ -77,7 +77,7 @@ namespace decpF20
             GlobalErrorsFromSteps[] maxGlobalErrors = new GlobalErrorsFromSteps[methods.Length];
             for (int i = 0; i < methods.Length; i++)
             {
-                methods[i].setNewBounds(1, methods[i].LowerBound, methods[i].HigherBound);
+                methods[i].setNewBounds(n0, methods[i].LowerBound, methods[i].HigherBound);
                 GlobalTruncationErrors initial_gte = new GlobalTruncationErrors(methods[i], exact_solution);
                 maxGlobalErrors[i] = new GlobalErrorsFromSteps(initial_gte, n0, N);
             }
