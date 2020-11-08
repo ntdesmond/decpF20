@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="decpF20.Function">
+    <Position X="6.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAEAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
+      <FileName>Function.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Variant4Function">
+    <Position X="6" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Variant4Solution">
+    <Position X="7.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Function.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.MainForm" Collapsed="true">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAEIAASBASASAEFKEBIACVKjpAQAAAEAAQHEIUAI=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.NumericalMethod">
+    <Position X="12.75" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAYCAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>NumericalMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.EulerMethod">
+    <Position X="11" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAACAAAAAAA=</HashCode>
+      <FileName>NumericalMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.ImprovedEulerMethod">
+    <Position X="13" Y="11.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAACAAAAAAA=</HashCode>
+      <FileName>NumericalMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.RungeKuttaMethod">
+    <Position X="15.25" Y="11.25" Width="1.75" />
+    <InheritanceLine Type="decpF20.NumericalMethod" FixedFromPoint="true">
+      <Path>
+        <Point X="14" Y="10.011" />
+        <Point X="14" Y="10.95" />
+        <Point X="16.125" Y="10.95" />
+        <Point X="16.125" Y="11.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAACAAAAAAA=</HashCode>
+      <FileName>NumericalMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Program" Collapsed="true">
+    <Position X="7.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Series">
+    <Position X="13" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAACABAAAAIAAAAAAIAAAAIAACAAACAAA=</HashCode>
+      <FileName>Series.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.GlobalTruncationErrors">
+    <Position X="10.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAQAAAAAAAAAAgQAAAAAAAAAAAAAAiAAAAAAA=</HashCode>
+      <FileName>Series.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.GlobalErrorsFromSteps">
+    <Position X="15.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAgQAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Series.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Properties.Resources" Collapsed="true">
+    <Position X="5.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAREAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="decpF20.Properties.Settings" Collapsed="true">
+    <Position X="7.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
